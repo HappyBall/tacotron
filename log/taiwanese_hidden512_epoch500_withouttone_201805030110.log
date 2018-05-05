@@ -1,0 +1,11 @@
+Epoch 1 average loss:  0.04616559397918057, average mel loss: 0.022142314622793775, average linear loss: 0.024023279340941527
+Epoch 2 average loss:  0.04589614734120812, average mel loss: 0.021941377206875952, average linear loss: 0.023954770160074284
+Epoch 3 average loss:  0.045594523490940654, average mel loss: 0.02172679431543539, average linear loss: 0.02386772919962156
+Epoch 4 average loss:  0.045320620533249076, average mel loss: 0.02153491383461254, average linear loss: 0.0237857067195012
+Epoch 5 average loss:  0.04512732396818695, average mel loss: 0.021388350863466004, average linear loss: 0.023738973083856287
+Epoch 6 average loss:  0.04473149642870719, average mel loss: 0.021151436371135354, average linear loss: 0.02358006004727499
+Epoch 7 average loss:  0.04461532579190273, average mel loss: 0.021053666052193637, average linear loss: 0.02356165979471592
+Epoch 8 average loss:  0.044390401442296494, average mel loss: 0.02090427594528725, average linear loss: 0.023486125535757903
+Epoch 9 average loss:  0.04420261392204575, average mel loss: 0.02077882831354222, average linear loss: 0.02342378560037444
+Epoch 10 average loss:  0.04416569314055971, average mel loss: 0.020726446854912563, average linear loss: 0.02343924627589224
+Epoch 11 average loss:  0.043888556282422136, average mel loss: 0.020564592788892843, average linear loss: 0.02332396344665155
