@@ -18,45 +18,86 @@ from bopomofo import to_bopomofo
 
 def load_vocab():
     # word base
-    """
-    transcript = os.path.join(hp.prepro_path, 'transcript_training.txt')
-    lines = open(transcript, "r").readlines()
-    text_dict = dict()
-    remove_key = list()
-    count = 0
+    if hp.input_mode == "word":
+        transcript = os.path.join(hp.prepro_path, 'transcript_training.txt')
+        lines = open(transcript, "r").readlines()
+        text_dict = dict()
+        remove_key = list()
+        count = 0
 
-    for line in lines:
-        text = ''.join(line.split()[1:])
+        for line in lines:
+            text = ''.join(line.split()[1:])
 
-        english_check = re.search('[a-zA-Z]', text)
-        if english_check:
-            continue
+            english_check = re.search('[a-zA-Z]', text)
+            if english_check:
+                continue
 
-        for word in text:
-            if word not in text_dict:
-                text_dict[word] = 0
-            text_dict[word] += 1
+            for word in text:
+                if word not in text_dict:
+                    text_dict[word] = 0
+                text_dict[word] += 1
 
-    for key in text_dict:
-        if text_dict[key] <= 5:
-            remove_key.append(key)
+        for key in text_dict:
+            if text_dict[key] <= 5:
+                remove_key.append(key)
 
-    for key in remove_key:
-        del text_dict[key]
+        for key in remove_key:
+            del text_dict[key]
 
-    char2idx = {char:idx for idx, char in enumerate(text_dict)}
-    idx2char = {idx:char for idx, char in enumerate(text_dict)}
-    length = len(char2idx)
-    char2idx['oov'] = length
-    char2idx['E'] = length+1
-    idx2char[length] = 'oov'
-    idx2char[length+1] = 'E'
-    """
+        char2idx = {char:idx for idx, char in enumerate(text_dict)}
+        idx2char = {idx:char for idx, char in enumerate(text_dict)}
+        length = len(char2idx)
+        char2idx['oov'] = length
+        char2idx['E'] = length+1
+        idx2char[length] = 'oov'
+        idx2char[length+1] = 'E'
 
     # bopomofo base
+    elif hp.input_mode == "bopomofo":
+        char2idx = {char: idx for idx, char in enumerate(hp.vocab)}
+        idx2char = {idx: char for idx, char in enumerate(hp.vocab)}
 
-    char2idx = {char: idx for idx, char in enumerate(hp.vocab)}
-    idx2char = {idx: char for idx, char in enumerate(hp.vocab)}
+    #syllable base
+    else:
+        transcript = os.path.join(hp.prepro_path, 'transcript_training.txt')
+        lines = open(transcript, "r").readlines()
+        syl_dict = dict()
+        remove_key = list()
+        count = 0
+
+        for line in lines:
+            text = ''.join(line.split()[1:])
+
+            english_check = re.search('[a-zA-Z]', text)
+            if english_check:
+                continue
+
+            if hp.withtone:
+                text = to_bopomofo(text)
+            else:
+                text = to_bopomofo(text, tones=False)
+
+            text = text.split()
+
+            for syl in text:
+                if syl not in syl_dict:
+                    syl_dict[syl] = 0
+                syl_dict[syl] += 1
+
+        for key in syl_dict:
+            if syl_dict[key] <= 5:
+                remove_key.append(key)
+
+        for key in remove_key:
+            del syl_dict[key]
+
+        char2idx = {char:idx for idx, char in enumerate(syl_dict)}
+        idx2char = {idx:char for idx, char in enumerate(syl_dict)}
+        length = len(char2idx)
+        char2idx['oov'] = length
+        char2idx['E'] = length+1
+        idx2char[length] = 'oov'
+        idx2char[length+1] = 'E'
 
     return char2idx, idx2char
 
@@ -92,15 +133,17 @@ def load_data(mode="train"):
             fname, text = line.strip().split()
 
             #text = text_normalize(text)
-            #print(text)
+
             if len(text) > hp.max_len:
-                len(text)
                 continue
 
             # bopomofo base
+            if hp.input_mode != "word":
+                if hp.withtone:
+                    text = to_bopomofo(text)
+                else:
+                    text = to_bopomofo(text, tones=False)
 
-            #text = to_bopomofo(text)
-            text = to_bopomofo(text, tones=False)
             text = text.replace("er", u"\u3126")
             text = text.replace("an", u"\u3122")
             text = text.replace("jue", u"\u3110\u3129\u311d")
@@ -110,25 +153,28 @@ def load_data(mode="train"):
             english_check = re.search('[a-zA-Z]', text)
             if english_check:
                 continue
-            text = text + "E"
-            #print(text)
-            text = "".join(text.split());
+            text = text + " E"
+            temp = []
+
+            if hp.input_mode != "syllable":
+                text = "".join(text.split());
+            else:
+                text = text.split()
 
             ### check illegal words
-            temp = []
             illegal_word = False
             for char in text:
                 if char not in char2idx:
-                    # word base
-                    #temp.append(char2idx['oov'])
-
-                    # bopomofo base
-
-                    illegal_word = True
-                    break
-
+                    if hp.input_mode == "word" or hp.input_mode == "syllable":
+                        # word base
+                        temp.append(char2idx['oov'])
+                    elif hp.input_mode == "bopomofo":
+                        # bopomofo base
+                        illegal_word = True
+                        break
                 else:
                     temp.append(char2idx[char])
+
             if illegal_word:
                 continue
 
@@ -166,31 +212,38 @@ def load_data(mode="train"):
         for line in lines:
 
             # bopomofo base
-            line = to_bopomofo(line.strip(), tones=False)
-            #line = to_bopomofo(line.strip())
+            if hp.input_mode != "word":
+                if hp.withtone:
+                    line = to_bopomofo(line.strip())
+                else:
+                    line = to_bopomofo(line.strip(), tones=False)
 
             english_check = re.search('[a-zA-Z]', line)
             if english_check:
                 continue
-            line = ''.join(line.split()) + "E"
+
+            if hp.input_mode == "syllable":
+                line = line + " E"
+                line = line.split()
+            else:
+                line = ''.join(line.split()) + "E"
             sents.append(line)
         lengths = [len(sent) for sent in sents]
         maxlen = sorted(lengths, reverse=True)[0]
         texts = np.zeros((len(sents), maxlen), np.int32)
-        # word base
-        """
-        for i, sent in enumerate(sents):
-            for j, char in enumerate(sent):
-                if char in char2idx:
-                    texts[i, j] = char2idx[char]
-                else:
-                    texts[i, j] = char2idx['oov']
-        """
 
-        # bopomofo base
-
-        for i, sent in enumerate(sents):
-            texts[i, :len(sent)] = [char2idx[char] for char in sent]
+        if hp.input_mode == "word" or hp.input_mode == "syllable":
+            # word base
+            for i, sent in enumerate(sents):
+                for j, char in enumerate(sent):
+                    if char in char2idx:
+                        texts[i, j] = char2idx[char]
+                    else:
+                        texts[i, j] = char2idx['oov']
+        elif hp.input_mode == "bopomofo":
+            # bopomofo base
+            for i, sent in enumerate(sents):
+                texts[i, :len(sent)] = [char2idx[char] for char in sent]
 
         return texts
 

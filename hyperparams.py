@@ -11,13 +11,23 @@ class Hyperparams:
     '''Hyper parameters'''
 
     # pipeline
+    withtone = False
+    input_mode = "syllable"
     prepro = True  # if True, run `python prepro.py` first before running `python train.py`.
     #prepro_path = "/nfs/Athena/yangchiyi/lecture_tts_data/prepro_data"
-    #prepro_path = "/home/yangchiyi/lecture_tts_data/prepro_data"
-    prepro_path = "/home/yangchiyi/DaAiSermon/prepro_data_nosilence"
+    prepro_path = "/home/yangchiyi/lecture_tts_data/prepro_data"
+    #prepro_path = "/home/yangchiyi/DaAiSermon/prepro_data_nosilence"
+
+    if input_mode == "bopomofo":
+        if withtone:
+            vocab = zhuyin.characters[:-1] + "E" + "˙ˊˇˋ"
+        else:
+            vocab = zhuyin.characters[:-1] + "E"
+    else:
+        vocab = zhuyin.characters[:-1] + "E"
 
     # bopomofo base without tone
-    vocab = zhuyin.characters[:-1] + "E"
+    #vocab = zhuyin.characters[:-1] + "E"
 
     # bopomofo base with tone
     #vocab = zhuyin.characters[:-1] + "E" + "˙ˊˇˋ"
@@ -28,8 +38,8 @@ class Hyperparams:
     # data = "/data/private/voice/LJSpeech-1.0"
     # data = "/data/private/voice/nick"
     #data = "/nfs/Athena/yangchiyi/lecture_tts_data/wav_trimmed"
-    #data = "/home/yangchiyi/lecture_tts_data/wav_trimmed"
-    data = "/home/yangchiyi/DaAiSermon/wav_nosilence"
+    data = "/home/yangchiyi/lecture_tts_data/wav_trimmed"
+    #data = "/home/yangchiyi/DaAiSermon/wav_nosilence"
     test_data = 'test_sentences_chinese.txt'
     max_duration = 10.0
     max_len = 25
@@ -49,7 +59,7 @@ class Hyperparams:
     ref_db = 20
 
     # model
-    embed_size = 512 # alias = E
+    embed_size = 256 # alias = E
     encoder_num_banks = 16
     decoder_num_banks = 8
     num_highwaynet_blocks = 4
@@ -59,8 +69,8 @@ class Hyperparams:
     # training scheme
     lr = 0.001 # Initial learning rate.
     #logdir = "/home_local/yangchiyi/tacotron_new_logdir/dataAll_hidden512_epoch500_chinese_withtone"
-    logdir = "/home/yangchiyi/tacotron_logdir/taiwanese_hidden512_epoch500_withouttone"
-    logfile = "/home/yangchiyi/tacotron_new/log/taiwanese_hidden512_epoch500_withouttone_201805030110.log"
+    logdir = "/home/yangchiyi/tacotron_logdir/chinese_hidden256_epoch500_withouttone_syllable"
+    logfile = "/home/yangchiyi/tacotron_new/log/chinese_hidden256_epoch500_withouttone_syllable_201805072100.log"
     sampledir = 'samples'
     batch_size = 32
     num_epochs = 500
