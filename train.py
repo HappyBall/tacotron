@@ -20,7 +20,7 @@ from graph import Graph
 
 FLAGS = tf.app.flags.FLAGS
 
-tf.app.flags.DEFINE_bool("keep_train", False, "keep training from existed model or not")
+tf.app.flags.DEFINE_string("keep_train", "False", "keep training from existed model or not")
 
 if __name__ == '__main__':
     keep_train = FLAGS.keep_train
@@ -35,7 +35,7 @@ if __name__ == '__main__':
         #while 1:
         writer = tf.summary.FileWriter(hp.logdir, graph = sess.graph)
 
-        if keep_train:
+        if keep_train == "True":
             saver.restore(sess, tf.train.latest_checkpoint(hp.logdir))
             print("Continue training from existed latest model...")
         else:
