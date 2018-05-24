@@ -11,7 +11,7 @@ from hyperparams import Hyperparams as hp
 import tqdm
 from data_load import load_data
 import tensorflow as tf
-from train import Graph
+from graph import Graph
 from utils import spectrogram2wav
 from scipy.io.wavfile import write
 import os

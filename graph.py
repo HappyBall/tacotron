@@ -51,6 +51,16 @@ class Graph:
             self.y_hat, self.alignments = decoder1(self.decoder_inputs,
                                                      self.memory,
                                                      is_training=is_training) # (N, T_y//r, n_mels*r)
+
+            # Guided attention loss
+            batch_size, N, T = tf.shape(self.alignments)[0], tf.shape(self.alignments)[1], tf.shape(self.alignments)[2]
+            g = 0.2
+            Ns = tf.tile(tf.expand_dims(tf.range(N)/N, 1), [1, T]) # shape: [N, T]
+            Ts = tf.tile(tf.expand_dims(tf.range(T)/T, 0), [N, 1]) # shape: [N, T]
+            W = tf.ones([N, T]) - tf.exp(-1*(tf.cast(tf.square(Ns - Ts), tf.float32) / (2*tf.square(g))))
+            nearly_diagonal_constraint = tf.multiply(self.alignments, tf.tile(tf.expand_dims(W, 0), [batch_size, 1, 1]))
+            self.guided_attn_loss = tf.reduce_mean(nearly_diagonal_constraint)
+
             # Decoder2 or postprocessing
             self.z_hat = decoder2(self.y_hat, is_training=is_training) # (N, T_y//r, (1+n_fft//2)*r)
 
@@ -61,7 +71,7 @@ class Graph:
             # Loss
             self.loss1 = tf.reduce_mean(tf.abs(self.y_hat - self.y))
             self.loss2 = tf.reduce_mean(tf.abs(self.z_hat - self.z))
-            self.loss = self.loss1 + self.loss2
+            self.loss = self.loss1 + self.loss2 + self.guided_attn_loss
 
             # Training Scheme
             self.global_step = tf.Variable(0, name='global_step', trainable=False)

@@ -15,6 +15,7 @@ import re
 import os
 import unicodedata
 from bopomofo import to_bopomofo
+from pypinyin import pinyin, Style
 
 def load_vocab():
     # word base
@@ -53,7 +54,7 @@ def load_vocab():
         idx2char[length+1] = 'E'
 
     # bopomofo base
-    elif hp.input_mode == "bopomofo":
+    elif hp.input_mode == "bopomofo" or hp.input_mode == "pinyin":
         char2idx = {char: idx for idx, char in enumerate(hp.vocab)}
         idx2char = {idx: char for idx, char in enumerate(hp.vocab)}
 
@@ -131,28 +132,39 @@ def load_data(mode="train"):
 
             #print(line)
             fname, text = line.strip().split()
-
             #text = text_normalize(text)
 
             if len(text) > hp.max_len:
                 continue
 
             # bopomofo base
-            if hp.input_mode != "word":
+            if hp.input_mode == "pinyin":
+                text_pinyin = pinyin(text, style=Style.TONE3)
+                text = ""
+                for t in text_pinyin:
+                    if hp.withtone:
+                        text = text + t[0]
+                    else:
+                        tmp = ''.join([i for i in t[0] if not i.isdigit()])
+                        text = text + tmp
+
+            elif hp.input_mode != "word":
                 if hp.withtone:
                     text = to_bopomofo(text)
                 else:
                     text = to_bopomofo(text, tones=False)
 
-            text = text.replace("er", u"\u3126")
-            text = text.replace("an", u"\u3122")
-            text = text.replace("jue", u"\u3110\u3129\u311d")
-            text = text.replace("xue", u"\u3112\u3129\u311d")
-            text = text.replace("aE", u"\u311a")
+            if hp.input_mode != "pinyin":
+                text = text.replace("er", u"\u3126")
+                text = text.replace("an", u"\u3122")
+                text = text.replace("jue", u"\u3110\u3129\u311d")
+                text = text.replace("xue", u"\u3112\u3129\u311d")
+                text = text.replace("aE", u"\u311a")
 
-            english_check = re.search('[a-zA-Z]', text)
-            if english_check:
-                continue
+                english_check = re.search('[a-zA-Z]', text)
+                if english_check:
+                    continue
+
             text = text + " E"
             temp = []
 
@@ -168,7 +180,7 @@ def load_data(mode="train"):
                     if hp.input_mode == "word" or hp.input_mode == "syllable":
                         # word base
                         temp.append(char2idx['oov'])
-                    elif hp.input_mode == "bopomofo":
+                    elif hp.input_mode == "bopomofo" or hp.input_mode == "pinyin":
                         # bopomofo base
                         illegal_word = True
                         break
@@ -211,16 +223,26 @@ def load_data(mode="train"):
         sents = []
         for line in lines:
 
+            if hp.input_mode == "pinyin":
+                line_pinyin = pinyin(line.strip(), style=Style.TONE3)
+                line = ""
+                for t in line_pinyin:
+                    if hp.withtone:
+                        line = line + t[0]
+                    else:
+                        tmp = ''.join([i for i in t[0] if not i.isdigit()])
+                        line = line + tmp
             # bopomofo base
-            if hp.input_mode != "word":
+            elif hp.input_mode != "word":
                 if hp.withtone:
                     line = to_bopomofo(line.strip())
                 else:
                     line = to_bopomofo(line.strip(), tones=False)
 
-            english_check = re.search('[a-zA-Z]', line)
-            if english_check:
-                continue
+            if hp.input_mode != "pinyin":
+                english_check = re.search('[a-zA-Z]', line)
+                if english_check:
+                    continue
 
             if hp.input_mode == "syllable":
                 line = line + " E"
@@ -240,7 +262,7 @@ def load_data(mode="train"):
                         texts[i, j] = char2idx[char]
                     else:
                         texts[i, j] = char2idx['oov']
-        elif hp.input_mode == "bopomofo":
+        elif hp.input_mode == "bopomofo" or hp.input_mode == "pinyin":
             # bopomofo base
             for i, sent in enumerate(sents):
                 texts[i, :len(sent)] = [char2idx[char] for char in sent]

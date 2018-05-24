@@ -31,6 +31,9 @@ def calculate_mse(arr1, arr2):
         result[:arr1.shape[0]] = arr1
         return mse(arr2, result)
 
+evaluate_wav_num = 400
+output_file = "evaluate_scores.txt"
+opf = open(output_file, "a")
 
 def evaluate():
     # Load graph
@@ -44,11 +47,11 @@ def evaluate():
     for i, text in enumerate(texts):
         new_texts[i, :len(text)] = [idx for idx in text]
     #new_texts = np.split(new_texts, 2)
-    new_texts = new_texts[:300]
+    new_texts = new_texts[:evaluate_wav_num]
     half_size = int(len(fpaths)/2)
     print(half_size)
     #new_fpaths = [fpaths[:half_size], fpaths[half_size:]]
-    fpaths = fpaths[:300]
+    fpaths = fpaths[:evaluate_wav_num]
     saver = tf.train.Saver()
     with tf.Session() as sess:
         saver.restore(sess, tf.train.latest_checkpoint(hp.logdir)); print("Evaluate Model Restored!")
@@ -85,12 +88,13 @@ def evaluate():
         for i, mag in enumerate(mags):
             fname, mel_ans, mag_ans = load_spectrograms(fpaths[i])
             print("File {} is being evaluated ...".format(fname))
-            audio = spectrogram2wav(mag)
-            audio_ans = spectrogram2wav(mag_ans)
-            err += calculate_mse(audio, audio_ans)
+            #audio = spectrogram2wav(mag)
+            #audio_ans = spectrogram2wav(mag_ans)
+            #err += calculate_mse(audio, audio_ans)
+            err += calculate_mse(mag, mag_ans)
         err = err/float(len(fpaths))
         print(err)
-
+        opf.write(hp.logdir  + " spectrogram mse: " + str(err) + "\n")
 
 if __name__ == '__main__':
     evaluate()

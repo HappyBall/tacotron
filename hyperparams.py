@@ -11,8 +11,8 @@ class Hyperparams:
     '''Hyper parameters'''
 
     # pipeline
-    withtone = False
-    input_mode = "syllable"
+    withtone = True
+    input_mode = "pinyin"
     prepro = True  # if True, run `python prepro.py` first before running `python train.py`.
     #prepro_path = "/nfs/Athena/yangchiyi/lecture_tts_data/prepro_data"
     prepro_path = "/home/yangchiyi/lecture_tts_data/prepro_data"
@@ -23,8 +23,14 @@ class Hyperparams:
             vocab = zhuyin.characters[:-1] + "E" + "˙ˊˇˋ"
         else:
             vocab = zhuyin.characters[:-1] + "E"
+    elif input_mode == "pinyin":
+        if withtone:
+            vocab = "E abcdefghijklmnopqrstuvwxyz?1234"
+        else:
+            vocab = "E abcdefghijklmnopqrstuvwxyz?"
     else:
         vocab = zhuyin.characters[:-1] + "E"
+        #vocab = zhuyin.characters[:-1] + "E" + "˙ˊˇˋ"    #for previous word base
 
     # bopomofo base without tone
     #vocab = zhuyin.characters[:-1] + "E"
@@ -45,6 +51,7 @@ class Hyperparams:
     max_len = 25
 
     # signal processing
+    #sr = 16000 # Sample rate.
     sr = 22050 # Sample rate.
     n_fft = 2048 # fft points (samples)
     frame_shift = 0.0125 # seconds
@@ -53,7 +60,7 @@ class Hyperparams:
     win_length = int(sr*frame_length) # samples.
     n_mels = 80 # Number of Mel banks to generate
     power = 1.2 # Exponent for amplifying the predicted magnitude
-    n_iter = 50 # Number of inversion iterations
+    n_iter = 300 # Number of inversion iterations
     preemphasis = .97 # or None
     max_db = 100
     ref_db = 20
@@ -70,7 +77,7 @@ class Hyperparams:
     lr = 0.001 # Initial learning rate.
     #logdir = "/home_local/yangchiyi/tacotron_new_logdir/dataAll_hidden512_epoch500_chinese_withtone"
     logdir = "/home/yangchiyi/tacotron_logdir/chinese_hidden256_epoch500_withouttone_syllable"
-    logfile = "/home/yangchiyi/tacotron_new/log/chinese_hidden256_epoch500_withouttone_syllable_201805072100.log"
+    logfile = "/home/yangchiyi/tacotron_new/log/chinese_hidden256_epoch500_withtone_syllable_201805101300.log"
     sampledir = 'samples'
     batch_size = 32
     num_epochs = 500
