@@ -12,7 +12,7 @@ class Hyperparams:
 
     # pipeline
     withtone = True
-    input_mode = "pinyin"
+    input_mode = "pinyin_syl"
     prepro = True  # if True, run `python prepro.py` first before running `python train.py`.
     #prepro_path = "/nfs/Athena/yangchiyi/lecture_tts_data/prepro_data"
     prepro_path = "/home/yangchiyi/lecture_tts_data/prepro_data"
@@ -76,8 +76,8 @@ class Hyperparams:
     # training scheme
     lr = 0.001 # Initial learning rate.
     #logdir = "/home_local/yangchiyi/tacotron_new_logdir/dataAll_hidden512_epoch500_chinese_withtone"
-    logdir = "/home/yangchiyi/tacotron_logdir/chinese_hidden256_epoch500_withouttone_syllable"
-    logfile = "/home/yangchiyi/tacotron_new/log/chinese_hidden256_epoch500_withtone_syllable_201805101300.log"
+    logdir = "/home/yangchiyi/tacotron_logdir/chinese_hidden256_epoch500_withouttone_pinyin"
+    logfile = "/home/yangchiyi/tacotron_new/log/chinese_hidden256_epoch500_withouttone_pinyin_201805241730.log"
     sampledir = 'samples'
     batch_size = 32
     num_epochs = 500

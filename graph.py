@@ -65,12 +65,14 @@ class Graph:
             self.z_hat = decoder2(self.y_hat, is_training=is_training) # (N, T_y//r, (1+n_fft//2)*r)
 
         # monitor
-        self.audio = tf.py_func(spectrogram2wav, [self.z_hat[0]], tf.float32)
+        self.audio_h = tf.py_func(spectrogram2wav, [self.z_hat[0]], tf.float32)
+        self.audio_gt = tf.py_func(spectrogram2wav, [self.z[0]], tf.float32)
 
         if mode in ("train", "eval"):
             # Loss
             self.loss1 = tf.reduce_mean(tf.abs(self.y_hat - self.y))
             self.loss2 = tf.reduce_mean(tf.abs(self.z_hat - self.z))
+            #self.loss = self.loss1 + self.loss2
             self.loss = self.loss1 + self.loss2 + self.guided_attn_loss
 
             # Training Scheme
@@ -87,6 +89,7 @@ class Graph:
             self.train_op = self.optimizer.apply_gradients(self.clipped, global_step=self.global_step)
 
             # Summary
+            tf.summary.scalar('{}/guided_attention_loss'.format(mode), self.guided_attn_loss)
             tf.summary.scalar('{}/loss1'.format(mode), self.loss1)
             tf.summary.scalar('{}/loss2'.format(mode), self.loss2)
             tf.summary.scalar('{}/loss'.format(mode), self.loss)
@@ -96,6 +99,8 @@ class Graph:
             tf.summary.image("{}/mel_hat".format(mode), tf.expand_dims(self.y_hat, -1), max_outputs=1)
             tf.summary.image("{}/mag_gt".format(mode), tf.expand_dims(self.z, -1), max_outputs=1)
             tf.summary.image("{}/mag_hat".format(mode), tf.expand_dims(self.z_hat, -1), max_outputs=1)
+            tf.summary.image("{}/attention".format(mode), tf.expand_dims(self.alignments, -1), max_outputs=1)
 
-            tf.summary.audio("{}/sample".format(mode), tf.expand_dims(self.audio, 0), hp.sr)
+            tf.summary.audio("{}/sample_hat".format(mode), tf.expand_dims(self.audio_h, 0), hp.sr)
+            tf.summary.audio("{}/sample_gt".format(mode), tf.expand_dims(self.audio_gt, 0), hp.sr)
             self.merged = tf.summary.merge_all()

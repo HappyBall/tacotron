@@ -73,10 +73,22 @@ def load_vocab():
             if english_check:
                 continue
 
-            if hp.withtone:
-                text = to_bopomofo(text)
+            if hp.input_mode == "syllable":
+                # bopomofo syllable
+                if hp.withtone:
+                    text = to_bopomofo(text)
+                else:
+                    text = to_bopomofo(text, tones=False)
             else:
-                text = to_bopomofo(text, tones=False)
+                # pinyin syllable
+                text_pinyin = pinyin(text, style=Style.TONE3)
+                text = ""
+                for t in text_pinyin:
+                    if hp.withtone:
+                        text = text + " " + t[0]
+                    else:
+                        tmp = ''.join([i for i in t[0] if not i.isdigit()])
+                        text = text + " " + tmp
 
             text = text.split()
 
@@ -138,15 +150,21 @@ def load_data(mode="train"):
                 continue
 
             # bopomofo base
-            if hp.input_mode == "pinyin":
+            if hp.input_mode == "pinyin" or hp.input_mode == "pinyin_syl":
                 text_pinyin = pinyin(text, style=Style.TONE3)
                 text = ""
                 for t in text_pinyin:
                     if hp.withtone:
-                        text = text + t[0]
+                        if hp.input_mode == "pinyin":
+                            text = text + t[0]
+                        else:
+                            text = text + " " + t[0]
                     else:
                         tmp = ''.join([i for i in t[0] if not i.isdigit()])
-                        text = text + tmp
+                        if hp.input_mode == "pinyin":
+                            text = text + tmp
+                        else:
+                            text = text + " " + t[0]
 
             elif hp.input_mode != "word":
                 if hp.withtone:
@@ -154,7 +172,7 @@ def load_data(mode="train"):
                 else:
                     text = to_bopomofo(text, tones=False)
 
-            if hp.input_mode != "pinyin":
+            if hp.input_mode != "pinyin" or hp.input_mode != "pinyin_syl":
                 text = text.replace("er", u"\u3126")
                 text = text.replace("an", u"\u3122")
                 text = text.replace("jue", u"\u3110\u3129\u311d")
@@ -168,7 +186,7 @@ def load_data(mode="train"):
             text = text + " E"
             temp = []
 
-            if hp.input_mode != "syllable":
+            if hp.input_mode != "syllable" or hp.input_mode != "pinyin_syl":
                 text = "".join(text.split());
             else:
                 text = text.split()
@@ -177,8 +195,8 @@ def load_data(mode="train"):
             illegal_word = False
             for char in text:
                 if char not in char2idx:
-                    if hp.input_mode == "word" or hp.input_mode == "syllable":
-                        # word base
+                    if hp.input_mode == "word" or hp.input_mode == "syllable" or hp.input_mode == "pinyin_syl":
+                        # word base or syllable base
                         temp.append(char2idx['oov'])
                     elif hp.input_mode == "bopomofo" or hp.input_mode == "pinyin":
                         # bopomofo base
@@ -223,28 +241,35 @@ def load_data(mode="train"):
         sents = []
         for line in lines:
 
-            if hp.input_mode == "pinyin":
-                line_pinyin = pinyin(line.strip(), style=Style.TONE3)
-                line = ""
-                for t in line_pinyin:
+            if hp.input_mode == "pinyin" or hp.input_mode == "pinyin_syl":
+                # pinyin base
+                text_pinyin = pinyin(text, style=Style.TONE3)
+                text = ""
+                for t in text_pinyin:
                     if hp.withtone:
-                        line = line + t[0]
+                        if hp.input_mode == "pinyin":
+                            text = text + t[0]
+                        else:
+                            text = text + " " + t[0]
                     else:
                         tmp = ''.join([i for i in t[0] if not i.isdigit()])
-                        line = line + tmp
-            # bopomofo base
+                        if hp.input_mode == "pinyin":
+                            text = text + tmp
+                        else:
+                            text = text + " " + t[0]
             elif hp.input_mode != "word":
+                # bopomofo base
                 if hp.withtone:
                     line = to_bopomofo(line.strip())
                 else:
                     line = to_bopomofo(line.strip(), tones=False)
 
-            if hp.input_mode != "pinyin":
+            if hp.input_mode != "pinyin" or hp.input_mode != "pinyin_syl":
                 english_check = re.search('[a-zA-Z]', line)
                 if english_check:
                     continue
 
-            if hp.input_mode == "syllable":
+            if hp.input_mode == "syllable" or hp.input_mode == "pinyin_syl":
                 line = line + " E"
                 line = line.split()
             else:
@@ -254,7 +279,7 @@ def load_data(mode="train"):
         maxlen = sorted(lengths, reverse=True)[0]
         texts = np.zeros((len(sents), maxlen), np.int32)
 
-        if hp.input_mode == "word" or hp.input_mode == "syllable":
+        if hp.input_mode == "word" or hp.input_mode == "syllable" or hp.input_mode == "pinyin_syl":
             # word base
             for i, sent in enumerate(sents):
                 for j, char in enumerate(sent):
