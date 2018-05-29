@@ -66,7 +66,8 @@ class Graph:
 
         # monitor
         self.audio_h = tf.py_func(spectrogram2wav, [self.z_hat[0]], tf.float32)
-        self.audio_gt = tf.py_func(spectrogram2wav, [self.z[0]], tf.float32)
+        if mode == "train":
+            self.audio_gt = tf.py_func(spectrogram2wav, [self.z[0]], tf.float32)
 
         if mode in ("train", "eval"):
             # Loss

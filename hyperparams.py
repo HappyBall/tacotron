@@ -11,12 +11,12 @@ class Hyperparams:
     '''Hyper parameters'''
 
     # pipeline
-    withtone = True
-    input_mode = "pinyin_syl"
+    withtone = False
+    input_mode = "bopomofo"
     prepro = True  # if True, run `python prepro.py` first before running `python train.py`.
     #prepro_path = "/nfs/Athena/yangchiyi/lecture_tts_data/prepro_data"
-    prepro_path = "/home/yangchiyi/lecture_tts_data/prepro_data"
-    #prepro_path = "/home/yangchiyi/DaAiSermon/prepro_data_nosilence"
+    #prepro_path = "/home/yangchiyi/lecture_tts_data/prepro_data"
+    prepro_path = "/home/yangchiyi/DaAiSermon/prepro_data"
 
     if input_mode == "bopomofo":
         if withtone:
@@ -44,8 +44,8 @@ class Hyperparams:
     # data = "/data/private/voice/LJSpeech-1.0"
     # data = "/data/private/voice/nick"
     #data = "/nfs/Athena/yangchiyi/lecture_tts_data/wav_trimmed"
-    data = "/home/yangchiyi/lecture_tts_data/wav_trimmed"
-    #data = "/home/yangchiyi/DaAiSermon/wav_nosilence"
+    #data = "/home/yangchiyi/lecture_tts_data/wav_trimmed"
+    data = "/home/yangchiyi/DaAiSermon/wav_nosilence"
     test_data = 'test_sentences_chinese.txt'
     max_duration = 10.0
     max_len = 25
@@ -60,7 +60,7 @@ class Hyperparams:
     win_length = int(sr*frame_length) # samples.
     n_mels = 80 # Number of Mel banks to generate
     power = 1.2 # Exponent for amplifying the predicted magnitude
-    n_iter = 300 # Number of inversion iterations
+    n_iter = 400 # Number of inversion iterations
     preemphasis = .97 # or None
     max_db = 100
     ref_db = 20
@@ -76,8 +76,8 @@ class Hyperparams:
     # training scheme
     lr = 0.001 # Initial learning rate.
     #logdir = "/home_local/yangchiyi/tacotron_new_logdir/dataAll_hidden512_epoch500_chinese_withtone"
-    logdir = "/home/yangchiyi/tacotron_logdir/chinese_hidden256_epoch500_withouttone_pinyin"
-    logfile = "/home/yangchiyi/tacotron_new/log/chinese_hidden256_epoch500_withouttone_pinyin_201805241730.log"
-    sampledir = 'samples'
+    logdir = "/home/yangchiyi/tacotron_logdir/taiwanese_hidden256_epoch500_bopomofo_withouttone_guidedattn"
+    logfile = "/home/yangchiyi/tacotron_new/log/taiwanese_hidden256_epoch500_bopomofo_withouttone_guidedattn_201805291640.log"
+    #sampledir = 'samples_pinyin_syllable_withtone'
     batch_size = 32
     num_epochs = 500
