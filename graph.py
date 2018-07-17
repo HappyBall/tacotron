@@ -9,7 +9,7 @@ from __future__ import print_function
 from hyperparams import Hyperparams as hp
 import tensorflow as tf
 from modules import *
-from networks import encoder, decoder1, decoder2
+from networks import encoder, decoder1, decoder1_scheduled, decoder2
 from utils import *
 from data_load import load_vocab, get_batch
 
@@ -48,11 +48,18 @@ class Graph:
             self.memory = encoder(self.encoder_inputs, is_training=is_training) # (N, T_x, E)
 
             # Decoder1
-            self.y_hat, self.alignments = decoder1(self.decoder_inputs,
-                                                     self.memory,
-                                                     is_training=is_training) # (N, T_y//r, n_mels*r)
+            if int(hp.schedule_prob) == 1:
+                self.y_hat, self.alignments = decoder1(self.decoder_inputs,
+                                                        self.memory,
+                                                        is_training=is_training)
+            else:
+                self.y_hat, self.alignments = decoder1_scheduled(self.decoder_inputs,
+                                                        self.memory,
+                                                        is_training=is_training,
+                                                        schedule=hp.schedule_prob) # (N, T_y//r, n_mels*r)
 
             # Guided attention loss
+
             batch_size, N, T = tf.shape(self.alignments)[0], tf.shape(self.alignments)[1], tf.shape(self.alignments)[2]
             g = 0.2
             Ns = tf.tile(tf.expand_dims(tf.range(N)/N, 1), [1, T]) # shape: [N, T]
@@ -60,6 +67,7 @@ class Graph:
             W = tf.ones([N, T]) - tf.exp(-1*(tf.cast(tf.square(Ns - Ts), tf.float32) / (2*tf.square(g))))
             nearly_diagonal_constraint = tf.multiply(self.alignments, tf.tile(tf.expand_dims(W, 0), [batch_size, 1, 1]))
             self.guided_attn_loss = tf.reduce_mean(nearly_diagonal_constraint)
+
 
             # Decoder2 or postprocessing
             self.z_hat = decoder2(self.y_hat, is_training=is_training) # (N, T_y//r, (1+n_fft//2)*r)
@@ -73,8 +81,11 @@ class Graph:
             # Loss
             self.loss1 = tf.reduce_mean(tf.abs(self.y_hat - self.y))
             self.loss2 = tf.reduce_mean(tf.abs(self.z_hat - self.z))
-            #self.loss = self.loss1 + self.loss2
-            self.loss = self.loss1 + self.loss2 + self.guided_attn_loss
+
+            if hp.guided_attention:
+                self.loss = self.loss1 + self.loss2 + self.guided_attn_loss
+            else:
+                self.loss = self.loss1 + self.loss2
 
             # Training Scheme
             self.global_step = tf.Variable(0, name='global_step', trainable=False)
@@ -90,7 +101,8 @@ class Graph:
             self.train_op = self.optimizer.apply_gradients(self.clipped, global_step=self.global_step)
 
             # Summary
-            tf.summary.scalar('{}/guided_attention_loss'.format(mode), self.guided_attn_loss)
+            if hp.guided_attention:
+                tf.summary.scalar('{}/guided_attention_loss'.format(mode), self.guided_attn_loss)
             tf.summary.scalar('{}/loss1'.format(mode), self.loss1)
             tf.summary.scalar('{}/loss2'.format(mode), self.loss2)
             tf.summary.scalar('{}/loss'.format(mode), self.loss)

@@ -59,6 +59,102 @@ def encoder(inputs, is_training=True, scope="encoder", reuse=None):
 
     return memory
 
+def decoder1_scheduled(inputs, memory, is_training=True, scope="decoder1", reuse=None, schedule=1.0):
+    '''
+    Args:
+      inputs: A 3d tensor with shape of [N, T_y/r, n_mels(*r)]. Shifted log melspectrogram of sound files.
+      memory: A 3d tensor with shape of [N, T_x, E].
+      is_training: Whether or not the layer is in training mode.
+      scope: Optional scope for `variable_scope`
+      reuse: Boolean, whether to reuse the weights of a previous layer
+        by the same name.
+
+    Returns
+      Predicted log melspectrogram tensor with shape of [N, T_y/r, n_mels*r].
+    '''
+
+    with tf.variable_scope(scope, reuse=reuse):
+        # Decoder pre-net
+        inputs = prenet(inputs, is_training=is_training, scope="decoder1_prenet")  # (N, T_y/r, E/2)
+        gru_cell_1 = tf.contrib.rnn.GRUCell(hp.embed_size, name="decoder1_gru1")
+        gru_cell_2 = tf.contrib.rnn.GRUCell(hp.embed_size, name="decoder1_gru2")
+        gru_cell_3 = tf.contrib.rnn.GRUCell(hp.embed_size, name="decoder1_gru3")
+
+        def step(previous_step_output, current_input):
+            current_input = current_input[0]
+            previous_output = previous_step_output[0][:, -hp.n_mels:]
+            previous_output = prenet(previous_output, is_training=is_training, scope="decoder1_prenet", reuse=True)
+            previous_context = previous_step_output[1]
+            previous_attention_weight = previous_step_output[2]
+            previous_state = previous_step_output[3:6]
+
+            if is_training:
+                bernoulli_sampler = tf.distributions.Bernoulli(probs=schedule)
+                sample = tf.fill(current_input.shape, bernoulli_sampler.sample())
+                sample = tf.cast(sample, tf.bool)
+                current_input = tf.where(sample, current_input, previous_output)
+            else:
+                current_input = previous_output
+
+            decoder_input = tf.concat([current_input, previous_context], axis=-1)
+
+            dec, state1 = gru_cell_1(decoder_input, previous_state[0]) # (N, T_y/r, E)
+            context_vector, attention_weight = do_attention(dec, memory, previous_attention_weight, hp.embed_size)
+
+            _dec, state2 = gru_cell_2(dec, previous_state[1]) # (N, T_y/r, E)
+            dec = _dec + dec
+            _dec, state3 = gru_cell_3(dec, previous_state[2]) # (N, T_y/r, E)
+            dec = _dec + dec
+
+            mel_hats = tf.layers.dense(dec, hp.n_mels*hp.r)
+
+            return [mel_hats, context_vector, attention_weight, state1, state2, state3]
+
+        batch_size = tf.shape(inputs)[0]
+        init_mel = tf.zeros([batch_size, hp.n_mels*hp.r])
+
+        init_context = tf.zeros([batch_size, memory.get_shape().as_list()[-1]])
+        init_attention_weight = tf.zeros(tf.shape(memory)[:2])
+        init_attention_weight = tf.concat([tf.ones_like(init_attention_weight[:,:1]), init_attention_weight[:,1:]], axis=1)
+        init_state = tf.zeros([batch_size, hp.embed_size])
+        init = [init_mel, init_context, init_attention_weight, init_state, init_state, init_state]
+
+        inputs_scan = tf.transpose(inputs, [1,0,2])
+        output = tf.scan(step, [inputs_scan], initializer=init)
+
+        mel_hats = tf.transpose(output[0], [1,0,2])
+        alignments = tf.transpose(output[2], [1,0,2])
+
+    return mel_hats, alignments
+
+def do_attention(state, memory, prev_weight, attention_hidden_units, memory_length=None, reuse=None):
+    """
+    bahdanau attention, aka, original attention
+    state: [batch_size x hidden_units]
+    memory: [batch_size x T x hidden_units]
+    prev_weight: [batch_size x T]
+    """
+
+    state_proj = tf.layers.dense(state, attention_hidden_units, use_bias=True)
+    memory_proj = tf.layers.dense(memory, attention_hidden_units, use_bias=None)
+    previous_feat = tf.layers.conv1d(inputs=tf.expand_dims(prev_weight,axis=-1), filters=10, kernel_size=50, padding='same')
+    previous_feat = tf.layers.dense(previous_feat, attention_hidden_units, use_bias=None)
+    temp = tf.expand_dims(state_proj, axis=1) + memory_proj + previous_feat
+    temp = tf.tanh(temp)
+    score = tf.squeeze(tf.layers.dense(temp, 1, use_bias=None),axis=-1)
+
+    #mask
+    if memory_length is not None:
+        mask = tf.sequence_mask(memory_length, tf.shape(memory)[1])
+        paddings = tf.cast(tf.fill(tf.shape(score), -2**30),tf.float32)
+        score = tf.where(mask, score, paddings)
+
+    weight = tf.nn.softmax(score) #[batch x T]
+    context_vector = tf.matmul(tf.expand_dims(weight,1),memory)
+    context_vector = tf.squeeze(context_vector,axis=1)
+
+    return context_vector, weight
+
 def decoder1(inputs, memory, is_training=True, scope="decoder1", reuse=None):
     '''
     Args:

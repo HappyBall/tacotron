@@ -13,6 +13,7 @@ import tensorflow as tf
 from utils import *
 import re
 import os
+import json
 import unicodedata
 from bopomofo import to_bopomofo
 from pypinyin import pinyin, Style
@@ -25,6 +26,8 @@ def load_vocab():
         text_dict = dict()
         remove_key = list()
         count = 0
+        char2idx = dict()
+        idx2char = dict()
 
         for line in lines:
             text = ''.join(line.split()[1:])
@@ -45,8 +48,13 @@ def load_vocab():
         for key in remove_key:
             del text_dict[key]
 
-        char2idx = {char:idx for idx, char in enumerate(text_dict)}
-        idx2char = {idx:char for idx, char in enumerate(text_dict)}
+        for idx, char in enumerate(text_dict):
+            char2idx[char] = idx+1
+            idx2char[idx+1] = char
+        #char2idx = {char:idx for idx, char in enumerate(text_dict)}
+        #idx2char = {idx:char for idx, char in enumerate(text_dict)}
+        char2idx['P'] = 0
+        idx2char[0] = 'P'
         length = len(char2idx)
         char2idx['oov'] = length
         char2idx['E'] = length+1
@@ -58,6 +66,10 @@ def load_vocab():
         char2idx = {char: idx for idx, char in enumerate(hp.vocab)}
         idx2char = {idx: char for idx, char in enumerate(hp.vocab)}
 
+    # phoneme base
+    elif hp.input_mode == "phoneme":
+        char2idx = json.load(open("./phoneme_preprocess/phone2idx.json", "r"))
+        idx2char = json.load(open("./phoneme_preprocess/idx2phone.json", "r"))
     #syllable base
     else:
         transcript = os.path.join(hp.prepro_path, 'transcript_training.txt')
@@ -65,6 +77,8 @@ def load_vocab():
         syl_dict = dict()
         remove_key = list()
         count = 0
+        char2idx = dict()
+        idx2char = dict()
 
         for line in lines:
             text = ''.join(line.split()[1:])
@@ -106,6 +120,14 @@ def load_vocab():
 
         char2idx = {char:idx for idx, char in enumerate(syl_dict)}
         idx2char = {idx:char for idx, char in enumerate(syl_dict)}
+
+        """
+        for idx, char in enumerate(syl_dict):
+            char2idx[char] = idx+1
+            idx2char[idx+1] = char
+        char2idx['P'] = 0
+        idx2char[0] = 'P'
+        """
         length = len(char2idx)
         char2idx['oov'] = length
         char2idx['E'] = length+1
@@ -126,6 +148,8 @@ def text_normalize(text):
 def load_data(mode="train"):
     # Load vocabulary
     char2idx, idx2char = load_vocab()
+    if hp.input_mode == "phoneme":
+        word2phonelist = json.load(open("./phoneme_preprocess/word2phonelist.json", "r"))
 
     if mode in ("train", "eval", "evaluate"):
         # Parse
@@ -165,14 +189,22 @@ def load_data(mode="train"):
                             text = text + tmp
                         else:
                             text = text + " " + t[0]
-
+            elif hp.input_mode == "phoneme":
+                t_tmp = ""
+                for t in text:
+                    if t not in word2phonelist:
+                        t_tmp = t_tmp + " " + "oov"
+                    else:
+                        phonelist = word2phonelist[t]
+                        t_tmp = t_tmp + " " + " ".join(phonelist)
+                text = t_tmp
             elif hp.input_mode != "word":
                 if hp.withtone:
                     text = to_bopomofo(text)
                 else:
                     text = to_bopomofo(text, tones=False)
 
-            if hp.input_mode != "pinyin" and hp.input_mode != "pinyin_syl":
+            if hp.input_mode != "pinyin" and hp.input_mode != "pinyin_syl" and hp.input_mode != "phoneme":
                 text = text.replace("er", u"\u3126")
                 text = text.replace("an", u"\u3122")
                 text = text.replace("jue", u"\u3110\u3129\u311d")
@@ -183,10 +215,14 @@ def load_data(mode="train"):
                 if english_check:
                     continue
 
-            text = text + " E"
+            if hp.input_mode == "phoneme":
+                text = text + " S"
+            else:
+                text = text + " E"
+
             temp = []
 
-            if hp.input_mode != "syllable" and hp.input_mode != "pinyin_syl":
+            if hp.input_mode != "syllable" and hp.input_mode != "pinyin_syl" and hp.input_mode != "phoneme":
                 text = "".join(text.split());
             else:
                 text = text.split()
@@ -195,7 +231,7 @@ def load_data(mode="train"):
             illegal_word = False
             for char in text:
                 if char not in char2idx:
-                    if hp.input_mode == "word" or hp.input_mode == "syllable" or hp.input_mode == "pinyin_syl":
+                    if hp.input_mode == "word" or hp.input_mode == "syllable" or hp.input_mode == "pinyin_syl" or hp.input_mode == "phoneme":
                         # word base or syllable base
                         temp.append(char2idx['oov'])
                     elif hp.input_mode == "bopomofo" or hp.input_mode == "pinyin":
@@ -218,23 +254,7 @@ def load_data(mode="train"):
 
             fpath = os.path.join(hp.data, fname + ".wav")
             fpaths.append(fpath)
-        """
-        if mode=="train":
-            lines = lines[1:]
-        else: # We attack only one sample!
-            lines = lines[:1]
 
-        for line in lines:
-            fname, _, text = line.strip().split("|")
-
-            fpath = os.path.join(hp.data, "wavs", fname + ".wav")
-            fpaths.append(fpath)
-
-            text = text_normalize(text) + "E"  # E: EOS
-            text = [char2idx[char] for char in text]
-            text_lengths.append(len(text))
-            texts.append(np.array(text, np.int32).tostring())
-        """
         return fpaths, text_lengths, texts
     else:
         lines = open(hp.test_data, 'r').readlines()
@@ -257,6 +277,15 @@ def load_data(mode="train"):
                             line = line + tmp
                         else:
                             line = line + " " + t[0]
+            elif hp.input_mode == "phoneme":
+                t_tmp = ""
+                for t in line:
+                    if t not in word2phonelist:
+                        t_tmp = t_tmp + " " + "oov"
+                    else:
+                        phonelist = word2phonelist[t]
+                        t_tmp = t_tmp + " " + " ".join(phonelist)
+                line = t_tmp
             elif hp.input_mode != "word":
                 # bopomofo base
                 if hp.withtone:
@@ -264,7 +293,7 @@ def load_data(mode="train"):
                 else:
                     line = to_bopomofo(line.strip(), tones=False)
 
-            if hp.input_mode != "pinyin" and hp.input_mode != "pinyin_syl":
+            if hp.input_mode != "pinyin" and hp.input_mode != "pinyin_syl" and hp.input_mode != "phoneme":
                 english_check = re.search('[a-zA-Z]', line)
                 if english_check:
                     continue
@@ -272,14 +301,18 @@ def load_data(mode="train"):
             if hp.input_mode == "syllable" or hp.input_mode == "pinyin_syl":
                 line = line + " E"
                 line = line.split()
+            elif hp.input_mode == "phoneme":
+                line = line + " S"
+                line = line.split()
             else:
                 line = ''.join(line.split()) + "E"
             sents.append(line)
+
         lengths = [len(sent) for sent in sents]
         maxlen = sorted(lengths, reverse=True)[0]
         texts = np.zeros((len(sents), maxlen), np.int32)
 
-        if hp.input_mode == "word" or hp.input_mode == "syllable" or hp.input_mode == "pinyin_syl":
+        if hp.input_mode == "word" or hp.input_mode == "syllable" or hp.input_mode == "pinyin_syl" or hp.input_mode == "phoneme":
             # word base
             for i, sent in enumerate(sents):
                 for j, char in enumerate(sent):
