@@ -15,8 +15,8 @@ class Hyperparams:
     input_mode = "bopomofo"
     prepro = True  # if True, run `python prepro.py` first before running `python train.py`.
     #prepro_path = "/nfs/Athena/yangchiyi/lecture_tts_data/prepro_data"
-    #prepro_path = "/home/yangchiyi/lecture_tts_data/prepro_data"
-    prepro_path = "/home/yangchiyi/DaAiSermon/prepro_data"
+    prepro_path = "/home/yangchiyi/lecture_tts_data/prepro_data"
+    #prepro_path = "/home/yangchiyi/DaAiSermon/prepro_data"
 
     if input_mode == "bopomofo":
         if withtone:
@@ -46,8 +46,8 @@ class Hyperparams:
 
     # data
     #data = "/nfs/Athena/yangchiyi/lecture_tts_data/wav_trimmed"
-    #data = "/home/yangchiyi/lecture_tts_data/wav_trimmed"
-    data = "/home/yangchiyi/DaAiSermon/wav_nosilence"
+    data = "/home/yangchiyi/lecture_tts_data/wav_trimmed"
+    #data = "/home/yangchiyi/DaAiSermon/wav_nosilence"
     test_data = 'test_sentences.txt'
     max_duration = 10.0
     max_len = 25
@@ -79,7 +79,7 @@ class Hyperparams:
 
     # training scheme
     lr = 0.001 # Initial learning rate.
-    logdir = "../tacotron_logdir/taiwanese_hidden256_epoch500_bopomofo_withouttone_guidedattn_schedule05"
+    logdir = "./test_logdir"
     logfile = "./test.log"
     sampledir = './'
     batch_size = 32
