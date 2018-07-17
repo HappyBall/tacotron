@@ -1,4 +1,4 @@
-# Tacotron for research on Chinese TTS and translation with TTS
+# Tacotron for research on Chinese speech synthesis and Taiwanese speech synthesis from Chinese input text sequence
 
 Version:
 Python3
