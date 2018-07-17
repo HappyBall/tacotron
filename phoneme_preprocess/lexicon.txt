@@ -1,0 +1,853 @@
+ㄅ CH_b-CH_@
+
+ㄆ CH_p-CH_@
+
+ㄇ CH_m-CH_@
+
+ㄈ CH_f-CH_@
+
+ㄉ CH_d-CH_@
+
+ㄊ CH_t-CH_@
+
+ㄋ CH_n-CH_@
+
+ㄌ CH_l-CH_@
+
+ㄍ CH_g-CH_@
+
+ㄎ CH_k-CH_@
+
+ㄏ CH_h-CH_@
+
+ㄐ CH_dz|-CH_i
+
+ㄑ CH_ts|-CH_i
+
+ㄒ CH_s|-CH_i
+
+ㄅㄚ CH_b-CH_a
+
+ㄅㄛ CH_b-CH_u-CH_o
+
+ㄅㄞ CH_b-CH_a-CH_i
+
+ㄅㄟ CH_b-CH_e-CH_i
+
+ㄅㄠ CH_b-CH_a-CH_u
+
+ㄅㄢ CH_b-CH_a-CH_n#
+
+ㄅㄣ CH_b-CH_@-CH_n#
+
+ㄅㄤ CH_b-CH_a-CH_N#
+
+ㄅㄥ CH_b-CH_o-CH_N#
+
+ㄅㄧ CH_b-CH_i
+
+ㄅㄧㄝ CH_b-CH_i-CH_E
+
+ㄅㄧㄠ CH_b-CH_i-CH_a-CH_u
+
+ㄅㄧㄢ CH_b-CH_i-CH_E-CH_n#
+
+ㄅㄧㄣ CH_b-CH_i-CH_n#
+
+ㄅㄧㄥ CH_b-CH_i-CH_N#
+
+ㄅㄨ CH_b-CH_u
+
+ㄆㄚ CH_p-CH_a
+
+ㄆㄛ CH_p-CH_u-CH_o
+
+ㄆㄞ CH_p-CH_a-CH_i
+
+ㄆㄟ CH_p-CH_e-CH_i
+
+ㄆㄠ CH_p-CH_a-CH_u
+
+ㄆㄡ CH_p-CH_o-CH_u
+
+ㄆㄢ CH_p-CH_a-CH_n#
+
+ㄆㄣ CH_p-CH_@-CH_n#
+
+ㄆㄤ CH_p-CH_a-CH_N#
+
+ㄆㄥ CH_p-CH_o-CH_N#
+
+ㄆㄧ CH_p-CH_i
+
+ㄆㄧㄝ CH_p-CH_i-CH_E
+
+ㄆㄧㄠ CH_p-CH_i-CH_a-CH_u
+
+ㄆㄧㄢ CH_p-CH_i-CH_E-CH_n#
+
+ㄆㄧㄣ CH_p-CH_i-CH_n#
+
+ㄆㄧㄥ CH_p-CH_i-CH_N#
+
+ㄆㄨ CH_p-CH_u
+
+ㄇㄚ CH_m-CH_a
+
+ㄇㄛ CH_m-CH_u-CH_o
+
+ㄇㄜ CH_m-CH_@
+
+ㄇㄞ CH_m-CH_a-CH_i
+
+ㄇㄟ CH_m-CH_e-CH_i
+
+ㄇㄠ CH_m-CH_a-CH_u
+
+ㄇㄡ CH_m-CH_o-CH_u
+
+ㄇㄢ CH_m-CH_a-CH_n#
+
+ㄇㄣ CH_m-CH_@-CH_n#
+
+ㄇㄤ CH_m-CH_a-CH_N#
+
+ㄇㄥ CH_m-CH_o-CH_N#
+
+ㄇㄧ CH_m-CH_i
+
+ㄇㄧㄝ CH_m-CH_i-CH_E
+
+ㄇㄧㄠ CH_m-CH_i-CH_a-CH_u
+
+ㄇㄧㄡ CH_m-CH_i-CH_o-CH_u
+
+ㄇㄧㄢ CH_m-CH_i-CH_E-CH_n#
+
+ㄇㄧㄣ CH_m-CH_i-CH_n#
+
+ㄇㄧㄥ CH_m-CH_i-CH_N#
+
+ㄇㄨ CH_m-CH_u
+
+ㄈㄚ CH_f-CH_a
+
+ㄈㄛ CH_f-CH_o
+
+ㄈㄟ CH_f-CH_e-CH_i
+
+ㄈㄡ CH_f-CH_o-CH_u
+
+ㄈㄢ CH_f-CH_a-CH_n#
+
+ㄈㄣ CH_f-CH_@-CH_n#
+
+ㄈㄤ CH_f-CH_a-CH_N#
+
+ㄈㄥ CH_f-CH_o-CH_N#
+
+ㄈㄨ CH_f-CH_u
+
+ㄉㄚ CH_d-CH_a
+
+ㄉㄜ CH_d-CH_@
+
+ㄉㄞ CH_d-CH_a-CH_i
+
+ㄉㄟ CH_d-CH_e-CH_i
+
+ㄉㄠ CH_d-CH_a-CH_u
+
+ㄉㄡ CH_d-CH_o-CH_u
+
+ㄉㄢ CH_d-CH_a-CH_n#
+
+ㄉㄤ CH_d-CH_a-CH_N#
+
+ㄉㄥ CH_d-CH_@-CH_N#
+
+ㄉㄧ CH_d-CH_i
+
+ㄉㄧㄚ CH_d-CH_i-CH_a
+
+ㄉㄧㄝ CH_d-CH_i-CH_E
+
+ㄉㄧㄠ CH_d-CH_i-CH_a-CH_u
+
+ㄉㄧㄡ CH_d-CH_i-CH_o-CH_u
+
+ㄉㄧㄢ CH_d-CH_i-CH_E-CH_n#
+
+ㄉㄧㄥ CH_d-CH_i-CH_N#
+
+ㄉㄨ CH_d-CH_u
+
+ㄉㄨㄛ CH_d-CH_u-CH_o
+
+ㄉㄨㄟ CH_d-CH_u-CH_e-CH_i
+
+ㄉㄨㄢ CH_d-CH_u-CH_a-CH_n#
+
+ㄉㄨㄣ CH_d-CH_u-CH_@-CH_n#
+
+ㄉㄨㄥ CH_d-CH_o-CH_N#
+
+ㄊㄚ CH_t-CH_a
+
+ㄊㄜ CH_t-CH_@
+
+ㄊㄞ CH_t-CH_a-CH_i
+
+ㄊㄠ CH_t-CH_a-CH_u
+
+ㄊㄡ CH_t-CH_o-CH_u
+
+ㄊㄢ CH_t-CH_a-CH_n#
+
+ㄊㄤ CH_t-CH_a-CH_N#
+
+ㄊㄥ CH_t-CH_@-CH_N#
+
+ㄊㄧ CH_t-CH_i
+
+ㄊㄧㄝ CH_t-CH_i-CH_E
+
+ㄊㄧㄠ CH_t-CH_i-CH_a-CH_u
+
+ㄊㄧㄢ CH_t-CH_i-CH_E-CH_n#
+
+ㄊㄧㄥ CH_t-CH_i-CH_N#
+
+ㄊㄨ CH_t-CH_u
+
+ㄊㄨㄛ CH_t-CH_u-CH_o
+
+ㄊㄨㄟ CH_t-CH_u-CH_e-CH_i
+
+ㄊㄨㄢ CH_t-CH_u-CH_a-CH_n#
+
+ㄊㄨㄣ CH_t-CH_u-CH_@-CH_n#
+
+ㄊㄨㄥ CH_t-CH_o-CH_N#
+
+ㄋㄚ CH_n-CH_a
+
+ㄋㄜ CH_n-CH_@
+
+ㄋㄞ CH_n-CH_a-CH_i
+
+ㄋㄟ CH_n-CH_e-CH_i
+
+ㄋㄠ CH_n-CH_a-CH_u
+
+ㄋㄡ CH_n-CH_o-CH_u
+
+ㄋㄢ CH_n-CH_a-CH_n#
+
+ㄋㄣ CH_n-CH_@-CH_n#
+
+ㄋㄤ CH_n-CH_a-CH_N#
+
+ㄋㄥ CH_n-CH_@-CH_N#
+
+ㄋㄧ CH_n-CH_i
+
+ㄋㄧㄝ CH_n-CH_i-CH_E
+
+ㄋㄧㄠ CH_n-CH_i-CH_a-CH_u
+
+ㄋㄧㄡ CH_n-CH_i-CH_o-CH_u
+
+ㄋㄧㄢ CH_n-CH_i-CH_E-CH_n#
+
+ㄋㄧㄣ CH_n-CH_i-CH_n#
+
+ㄋㄧㄤ CH_n-CH_i-CH_a-CH_N#
+
+ㄋㄧㄥ CH_n-CH_i-CH_N#
+
+ㄋㄨ CH_n-CH_u
+
+ㄋㄨㄛ CH_n-CH_u-CH_o
+
+ㄋㄨㄢ CH_n-CH_u-CH_a-CH_n#
+
+ㄋㄨㄥ CH_n-CH_o-CH_N#
+
+ㄋㄩ CH_n-CH_y
+
+ㄋㄩㄝ CH_n-CH_y-CH_E
+
+ㄌㄚ CH_l-CH_a
+
+ㄌㄛ CH_l-CH_o
+
+ㄌㄜ CH_l-CH_@
+
+ㄌㄞ CH_l-CH_a-CH_i
+
+ㄌㄟ CH_l-CH_e-CH_i
+
+ㄌㄠ CH_l-CH_a-CH_u
+
+ㄌㄡ CH_l-CH_o-CH_u
+
+ㄌㄢ CH_l-CH_a-CH_n#
+
+ㄌㄤ CH_l-CH_a-CH_N#
+
+ㄌㄥ CH_l-CH_@-CH_N#
+
+ㄌㄧ CH_l-CH_i
+
+ㄌㄧㄚ CH_l-CH_i-CH_a
+
+ㄌㄧㄝ CH_l-CH_i-CH_E
+
+ㄌㄧㄠ CH_l-CH_i-CH_a-CH_u
+
+ㄌㄧㄡ CH_l-CH_i-CH_o-CH_u
+
+ㄌㄧㄢ CH_l-CH_i-CH_E-CH_n#
+
+ㄌㄧㄣ CH_l-CH_i-CH_n#
+
+ㄌㄧㄤ CH_l-CH_i-CH_a-CH_N#
+
+ㄌㄧㄥ CH_l-CH_i-CH_N#
+
+ㄌㄨ CH_l-CH_u
+
+ㄌㄨㄛ CH_l-CH_u-CH_o
+
+ㄌㄨㄢ CH_l-CH_u-CH_a-CH_n#
+
+ㄌㄨㄣ CH_l-CH_u-CH_@-CH_n#
+
+ㄌㄨㄥ CH_l-CH_o-CH_N#
+
+ㄌㄩ CH_l-CH_y
+
+ㄌㄩㄝ CH_l-CH_y-CH_E
+
+ㄌㄩㄢ CH_l-CH_y-CH_E-CH_n#
+
+ㄌㄩㄣ CH_l-CH_y-CH_n#
+
+ㄍㄚ CH_g-CH_a
+
+ㄍㄜ CH_g-CH_@
+
+ㄍㄞ CH_g-CH_a-CH_i
+
+ㄍㄟ CH_g-CH_e-CH_i
+
+ㄍㄠ CH_g-CH_a-CH_u
+
+ㄍㄡ CH_g-CH_o-CH_u
+
+ㄍㄢ CH_g-CH_a-CH_n#
+
+ㄍㄣ CH_g-CH_@-CH_n#
+
+ㄍㄤ CH_g-CH_a-CH_N#
+
+ㄍㄥ CH_g-CH_@-CH_N#
+
+ㄍㄨ CH_g-CH_u
+
+ㄍㄨㄚ CH_g-CH_u-CH_a
+
+ㄍㄨㄛ CH_g-CH_u-CH_o
+
+ㄍㄨㄞ CH_g-CH_u-CH_a-CH_i
+
+ㄍㄨㄟ CH_g-CH_u-CH_e-CH_i
+
+ㄍㄨㄢ CH_g-CH_u-CH_a-CH_n#
+
+ㄍㄨㄣ CH_g-CH_u-CH_@-CH_n#
+
+ㄍㄨㄤ CH_g-CH_u-CH_a-CH_N#
+
+ㄍㄨㄥ CH_g-CH_o-CH_N#
+
+ㄎㄚ CH_k-CH_a
+
+ㄎㄜ CH_k-CH_@
+
+ㄎㄞ CH_k-CH_a-CH_i
+
+ㄎㄠ CH_k-CH_a-CH_u
+
+ㄎㄡ CH_k-CH_o-CH_u
+
+ㄎㄢ CH_k-CH_a-CH_n#
+
+ㄎㄣ CH_k-CH_@-CH_n#
+
+ㄎㄤ CH_k-CH_a-CH_N#
+
+ㄎㄥ CH_k-CH_@-CH_N#
+
+ㄎㄨ CH_k-CH_u
+
+ㄎㄨㄚ CH_k-CH_u-CH_a
+
+ㄎㄨㄛ CH_k-CH_u-CH_o
+
+ㄎㄨㄞ CH_k-CH_u-CH_a-CH_i
+
+ㄎㄨㄟ CH_k-CH_u-CH_e-CH_i
+
+ㄎㄨㄢ CH_k-CH_u-CH_a-CH_n#
+
+ㄎㄨㄣ CH_k-CH_u-CH_@-CH_n#
+
+ㄎㄨㄤ CH_k-CH_u-CH_a-CH_N#
+
+ㄎㄨㄥ CH_k-CH_o-CH_N#
+
+ㄏㄚ CH_h-CH_a
+
+ㄏㄜ CH_h-CH_@
+
+ㄏㄞ CH_h-CH_a-CH_i
+
+ㄏㄟ CH_h-CH_e-CH_i
+
+ㄏㄠ CH_h-CH_a-CH_u
+
+ㄏㄡ CH_h-CH_o-CH_u
+
+ㄏㄢ CH_h-CH_a-CH_n#
+
+ㄏㄣ CH_h-CH_@-CH_n#
+
+ㄏㄤ CH_h-CH_a-CH_N#
+
+ㄏㄥ CH_h-CH_@-CH_N#
+
+ㄏㄨ CH_h-CH_u
+
+ㄏㄨㄚ CH_h-CH_u-CH_a
+
+ㄏㄨㄛ CH_h-CH_u-CH_o
+
+ㄏㄨㄞ CH_h-CH_u-CH_a-CH_i
+
+ㄏㄨㄟ CH_h-CH_u-CH_e-CH_i
+
+ㄏㄨㄢ CH_h-CH_u-CH_a-CH_n#
+
+ㄏㄨㄣ CH_h-CH_u-CH_@-CH_n#
+
+ㄏㄨㄤ CH_h-CH_u-CH_a-CH_N#
+
+ㄏㄨㄥ CH_h-CH_o-CH_N#
+
+ㄐㄧ CH_dz|-CH_i
+
+ㄐㄧㄚ CH_dz|-CH_i-CH_a
+
+ㄐㄧㄝ CH_dz|-CH_i-CH_E
+
+ㄐㄧㄠ CH_dz|-CH_i-CH_a-CH_u
+
+ㄐㄧㄡ CH_dz|-CH_i-CH_o-CH_u
+
+ㄐㄧㄢ CH_dz|-CH_i-CH_E-CH_n#
+
+ㄐㄧㄣ CH_dz|-CH_i-CH_n#
+
+ㄐㄧㄤ CH_dz|-CH_i-CH_a-CH_N#
+
+ㄐㄧㄥ CH_dz|-CH_i-CH_N#
+
+ㄐㄩ CH_dz|-CH_y
+
+ㄐㄩㄝ CH_dz|-CH_y-CH_E
+
+ㄐㄩㄢ CH_dz|-CH_y-CH_E-CH_n#
+
+ㄐㄩㄣ CH_dz|-CH_y-CH_n#
+
+ㄐㄩㄥ CH_dz|-CH_y-CH_o-CH_N#
+
+ㄑㄧ CH_ts|-CH_i
+
+ㄑㄧㄚ CH_ts|-CH_i-CH_a
+
+ㄑㄧㄝ CH_ts|-CH_i-CH_E
+
+ㄑㄧㄠ CH_ts|-CH_i-CH_a-CH_u
+
+ㄑㄧㄡ CH_ts|-CH_i-CH_o-CH_u
+
+ㄑㄧㄢ CH_ts|-CH_i-CH_E-CH_n#
+
+ㄑㄧㄣ CH_ts|-CH_i-CH_n#
+
+ㄑㄧㄤ CH_ts|-CH_i-CH_a-CH_N#
+
+ㄑㄧㄥ CH_ts|-CH_i-CH_N#
+
+ㄑㄩ CH_ts|-CH_y
+
+ㄑㄩㄝ CH_ts|-CH_y-CH_E
+
+ㄑㄩㄢ CH_ts|-CH_y-CH_E-CH_n#
+
+ㄑㄩㄣ CH_ts|-CH_y-CH_n#
+
+ㄑㄩㄥ CH_ts|-CH_y-CH_o-CH_N#
+
+ㄒㄧ CH_s|-CH_i
+
+ㄒㄧㄚ CH_s|-CH_i-CH_a
+
+ㄒㄧㄝ CH_s|-CH_i-CH_E
+
+ㄒㄧㄠ CH_s|-CH_i-CH_a-CH_u
+
+ㄒㄧㄡ CH_s|-CH_i-CH_o-CH_u
+
+ㄒㄧㄢ CH_s|-CH_i-CH_E-CH_n#
+
+ㄒㄧㄣ CH_s|-CH_i-CH_n#
+
+ㄒㄧㄤ CH_s|-CH_i-CH_a-CH_N#
+
+ㄒㄧㄥ CH_s|-CH_i-CH_N#
+
+ㄒㄩ CH_s|-CH_y
+
+ㄒㄩㄝ CH_s|-CH_y-CH_E
+
+ㄒㄩㄢ CH_s|-CH_y-CH_E-CH_n#
+
+ㄒㄩㄣ CH_s|-CH_y-CH_n#
+
+ㄒㄩㄥ CH_s|-CH_y-CH_o-CH_N#
+
+ㄓ CH_dz`-CH_U`
+
+ㄓㄚ CH_dz`-CH_a
+
+ㄓㄜ CH_dz`-CH_@
+
+ㄓㄞ CH_dz`-CH_a-CH_i
+
+ㄓㄟ CH_dz`-CH_e-CH_i
+
+ㄓㄠ CH_dz`-CH_a-CH_u
+
+ㄓㄡ CH_dz`-CH_o-CH_u
+
+ㄓㄢ CH_dz`-CH_a-CH_n#
+
+ㄓㄣ CH_dz`-CH_@-CH_n#
+
+ㄓㄤ CH_dz`-CH_a-CH_N#
+
+ㄓㄥ CH_dz`-CH_@-CH_N#
+
+ㄓㄨ CH_dz`-CH_u
+
+ㄓㄨㄚ CH_dz`-CH_u-CH_a
+
+ㄓㄨㄛ CH_dz`-CH_u-CH_o
+
+ㄓㄨㄞ CH_dz`-CH_u-CH_a-CH_i
+
+ㄓㄨㄟ CH_dz`-CH_u-CH_e-CH_i
+
+ㄓㄨㄢ CH_dz`-CH_u-CH_a-CH_n#
+
+ㄓㄨㄣ CH_dz`-CH_u-CH_@-CH_n#
+
+ㄓㄨㄤ CH_dz`-CH_u-CH_a-CH_N#
+
+ㄓㄨㄥ CH_dz`-CH_o-CH_N#
+
+ㄔ CH_ts`-CH_U`
+
+ㄔㄚ CH_ts`-CH_a
+
+ㄔㄜ CH_ts`-CH_@
+
+ㄔㄞ CH_ts`-CH_a-CH_i
+
+ㄔㄠ CH_ts`-CH_a-CH_u
+
+ㄔㄡ CH_ts`-CH_o-CH_u
+
+ㄔㄢ CH_ts`-CH_a-CH_n#
+
+ㄔㄣ CH_ts`-CH_@-CH_n#
+
+ㄔㄤ CH_ts`-CH_a-CH_N#
+
+ㄔㄥ CH_ts`-CH_@-CH_N#
+
+ㄔㄨ CH_ts`-CH_u
+
+ㄔㄨㄚ CH_ts`-CH_u-CH_a
+
+ㄔㄨㄛ CH_ts`-CH_u-CH_o
+
+ㄔㄨㄞ CH_ts`-CH_u-CH_a-CH_i
+
+ㄔㄨㄟ CH_ts`-CH_u-CH_e-CH_i
+
+ㄔㄨㄢ CH_ts`-CH_u-CH_a-CH_n#
+
+ㄔㄨㄣ CH_ts`-CH_u-CH_@-CH_n#
+
+ㄔㄨㄤ CH_ts`-CH_u-CH_a-CH_N#
+
+ㄔㄨㄥ CH_ts`-CH_o-CH_N#
+
+ㄕ CH_s`-CH_U`
+
+ㄕㄚ CH_s`-CH_a
+
+ㄕㄜ CH_s`-CH_@
+
+ㄕㄞ CH_s`-CH_a-CH_i
+
+ㄕㄟ CH_s`-CH_e-CH_i
+
+ㄕㄠ CH_s`-CH_a-CH_u
+
+ㄕㄡ CH_s`-CH_o-CH_u
+
+ㄕㄢ CH_s`-CH_a-CH_n#
+
+ㄕㄣ CH_s`-CH_@-CH_n#
+
+ㄕㄤ CH_s`-CH_a-CH_N#
+
+ㄕㄥ CH_s`-CH_@-CH_N#
+
+ㄕㄨ CH_s`-CH_u
+
+ㄕㄨㄚ CH_s`-CH_u-CH_a
+
+ㄕㄨㄛ CH_s`-CH_u-CH_o
+
+ㄕㄨㄞ CH_s`-CH_u-CH_a-CH_i
+
+ㄕㄨㄟ CH_s`-CH_u-CH_e-CH_i
+
+ㄕㄨㄢ CH_s`-CH_u-CH_a-CH_n#
+
+ㄕㄨㄣ CH_s`-CH_u-CH_@-CH_n#
+
+ㄕㄨㄤ CH_s`-CH_u-CH_a-CH_N#
+
+ㄕㄨㄥ CH_s`-CH_o-CH_N#
+
+ㄖ CH_Z`-CH_U`
+
+ㄖㄜ CH_Z`-CH_@
+
+ㄖㄠ CH_Z`-CH_a-CH_u
+
+ㄖㄡ CH_Z`-CH_o-CH_u
+
+ㄖㄢ CH_Z`-CH_a-CH_n#
+
+ㄖㄣ CH_Z`-CH_@-CH_n#
+
+ㄖㄤ CH_Z`-CH_a-CH_N#
+
+ㄖㄥ CH_Z`-CH_@-CH_N#
+
+ㄖㄨ CH_Z`-CH_u
+
+ㄖㄨㄛ CH_Z`-CH_u-CH_o
+
+ㄖㄨㄟ CH_Z`-CH_u-CH_e-CH_i
+
+ㄖㄨㄢ CH_Z`-CH_u-CH_a-CH_n#
+
+ㄖㄨㄣ CH_Z`-CH_u-CH_@-CH_n#
+
+ㄖㄨㄥ CH_Z`-CH_o-CH_N#
+
+ㄗ CH_dz-CH_U
+
+ㄗㄚ CH_dz-CH_a
+
+ㄗㄜ CH_dz-CH_@
+
+ㄗㄞ CH_dz-CH_a-CH_i
+
+ㄗㄟ CH_dz-CH_e-CH_i
+
+ㄗㄠ CH_dz-CH_a-CH_u
+
+ㄗㄡ CH_dz-CH_o-CH_u
+
+ㄗㄢ CH_dz-CH_a-CH_n#
+
+ㄗㄣ CH_dz-CH_@-CH_n#
+
+ㄗㄤ CH_dz-CH_a-CH_N#
+
+ㄗㄥ CH_dz-CH_@-CH_N#
+
+ㄗㄨ CH_dz-CH_u
+
+ㄗㄨㄛ CH_dz-CH_u-CH_o
+
+ㄗㄨㄟ CH_dz-CH_u-CH_e-CH_i
+
+ㄗㄨㄢ CH_dz-CH_u-CH_a-CH_n#
+
+ㄗㄨㄣ CH_dz-CH_u-CH_@-CH_n#
+
+ㄗㄨㄥ CH_dz-CH_o-CH_N#
+
+ㄘ CH_ts-CH_U
+
+ㄘㄚ CH_ts-CH_a
+
+ㄘㄜ CH_ts-CH_@
+
+ㄘㄞ CH_ts-CH_a-CH_i
+
+ㄘㄠ CH_ts-CH_a-CH_u
+
+ㄘㄡ CH_ts-CH_o-CH_u
+
+ㄘㄢ CH_ts-CH_a-CH_n#
+
+ㄘㄣ CH_ts-CH_@-CH_n#
+
+ㄘㄤ CH_ts-CH_a-CH_N#
+
+ㄘㄥ CH_ts-CH_@-CH_N#
+
+ㄘㄨ CH_ts-CH_u
+
+ㄘㄨㄛ CH_ts-CH_u-CH_o
+
+ㄘㄨㄟ CH_ts-CH_u-CH_e-CH_i
+
+ㄘㄨㄢ CH_ts-CH_u-CH_a-CH_n#
+
+ㄘㄨㄣ CH_ts-CH_u-CH_@-CH_n#
+
+ㄘㄨㄥ CH_ts-CH_o-CH_N#
+
+ㄙ CH_s-CH_U
+
+ㄙㄚ CH_s-CH_a
+
+ㄙㄜ CH_s-CH_@
+
+ㄙㄞ CH_s-CH_a-CH_i
+
+ㄙㄟ CH_s-CH_e-CH_i
+
+ㄙㄠ CH_s-CH_a-CH_u
+
+ㄙㄡ CH_s-CH_o-CH_u
+
+ㄙㄢ CH_s-CH_a-CH_n#
+
+ㄙㄣ CH_s-CH_@-CH_n#
+
+ㄙㄤ CH_s-CH_a-CH_N#
+
+ㄙㄥ CH_s-CH_@-CH_N#
+
+ㄙㄨ CH_s-CH_u
+
+ㄙㄨㄛ CH_s-CH_u-CH_o
+
+ㄙㄨㄟ CH_s-CH_u-CH_e-CH_i
+
+ㄙㄨㄢ CH_s-CH_u-CH_a-CH_n#
+
+ㄙㄨㄣ CH_s-CH_u-CH_@-CH_n#
+
+ㄙㄨㄥ CH_s-CH_o-CH_N#
+
+ㄚ CH_#-CH_a
+
+ㄛ CH_#-CH_o
+
+ㄜ CH_#-CH_@
+
+ㄝ CH_#-CH_E
+
+ㄞ CH_#-CH_a-CH_i
+
+ㄟ CH_#-CH_e-CH_i
+
+ㄠ CH_#-CH_a-CH_u
+
+ㄡ CH_#-CH_o-CH_u
+
+ㄢ CH_#-CH_a-CH_n#
+
+ㄣ CH_#-CH_@-CH_n#
+
+ㄤ CH_#-CH_a-CH_N#
+
+ㄥ CH_#-CH_@-CH_N#
+
+ㄦ CH_#-CH_@`
+
+ㄧ CH_#-CH_i
+
+ㄧㄚ CH_#-CH_i-CH_a
+
+ㄧㄛ CH_#-CH_i-CH_o
+
+ㄧㄝ CH_#-CH_i-CH_E
+
+ㄧㄞ CH_#-CH_i-CH_a-CH_i
+
+ㄧㄠ CH_#-CH_i-CH_a-CH_u
+
+ㄧㄡ CH_#-CH_i-CH_o-CH_u
+
+ㄧㄢ CH_#-CH_i-CH_E-CH_n#
+
+ㄧㄣ CH_#-CH_i-CH_n#
+
+ㄧㄤ CH_#-CH_i-CH_a-CH_N#
+
+ㄧㄥ CH_#-CH_i-CH_N#
+
+ㄨ CH_#-CH_u
+
+ㄨㄚ CH_#-CH_u-CH_a
+
+ㄨㄛ CH_#-CH_u-CH_o
+
+ㄨㄞ CH_#-CH_u-CH_a-CH_i
+
+ㄨㄟ CH_#-CH_u-CH_e-CH_i
+
+ㄨㄢ CH_#-CH_u-CH_a-CH_n#
+
+ㄨㄣ CH_#-CH_u-CH_@-CH_n#
+
+ㄨㄤ CH_#-CH_u-CH_a-CH_N#
+
+ㄨㄥ CH_#-CH_u-CH_o-CH_N#
+
+ㄩ CH_#-CH_y
+
+ㄩㄝ CH_#-CH_y-CH_E
+
+ㄩㄢ CH_#-CH_y-CH_E-CH_n#
+
+ㄩㄣ CH_#-CH_y-CH_n#
+
+ㄩㄥ CH_#-CH_y-CH_o-CH_N#
