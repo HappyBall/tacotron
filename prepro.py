@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+#/usr/bin/python2
+'''
+modified from
+https://www.github.com/kyubyong/tacotron
+'''
+
 from __future__ import print_function
 
 from utils import load_spectrograms

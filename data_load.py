@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+'''
+modified from
+https://www.github.com/kyubyong/tacotron
+'''
+
 from __future__ import print_function
 
 from hyperparams import Hyperparams as hp

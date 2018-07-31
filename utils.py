@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+'''
+By kyubyong park. kbpark.linguist@gmail.com.
+https://www.github.com/kyubyong/dc_tts
+'''
 from __future__ import print_function, division
 
 from hyperparams import Hyperparams as hp
