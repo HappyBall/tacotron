@@ -78,5 +78,3 @@ The program will automatically calculate the mean square error between the mel s
 `prepro.py`: preprocess data  
 `synthesize.py`: synthesize speech conditioned on input text sequences in the test sentence file  
 `train.py`: train models  
-
-Some codes were modified from [Kyubyong Park & Tommy Mulc](https://github.com/Kyubyong/tacotron.git)
