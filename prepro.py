@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-#/usr/bin/python2
 '''
 modified from
 https://www.github.com/kyubyong/tacotron
