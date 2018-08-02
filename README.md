@@ -5,12 +5,16 @@ speech conditioned on Chinese input text sequence with different granularities
 
 ## Prerequisites
 1. Python packages:
-    - Python 3.4 or higher
-    - Tensorflow r1.8 or higher
-    - Numpy
-    - Zhon
-    - Pypinyin
-    - Bopomofo
+    - python 3.4 or higher
+    - tensorflow r1.8 or higher
+    - numpy
+    - librosa
+    - scipy
+    - tqdm
+    - matplotlib
+    - zhon
+    - pypinyin
+    - bopomofo
 
 2. Clone this repository:
 ```shell=
