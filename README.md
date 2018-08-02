@@ -8,6 +8,9 @@ speech conditioned on Chinese input text sequence with different granularities
     - Python 3.4 or higher
     - Tensorflow r1.8 or higher
     - Numpy
+    - Zhon
+    - Pypinyin
+    - Bopomofo
 
 2. Clone this repository:
 ```shell=
